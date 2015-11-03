@@ -2,12 +2,12 @@ package me.gujun.android.taggroup.demo;
 
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import me.gujun.android.taggroup.TagGroup;
 import me.gujun.android.taggroup.demo.db.TagsManager;
-
 
 public class TagEditorActivity extends ActionBarActivity {
     private TagGroup mTagGroup;
@@ -23,6 +23,17 @@ public class TagEditorActivity extends ActionBarActivity {
 
         mTagGroup = (TagGroup) findViewById(R.id.tag_group);
         mTagGroup.setTags(tags);
+        mTagGroup.setmOnTagFilter(new TagGroup.OnTagFilter() {
+            @Override
+            public boolean filterAddTag(TagGroup tagGroup, String tag) {
+                for (String t : tagGroup.getTags()) {
+                    if (TextUtils.equals(t, tag)) {
+                        return true;
+                    }
+                }
+                return false;
+            }
+        });
     }
 
     @Override
