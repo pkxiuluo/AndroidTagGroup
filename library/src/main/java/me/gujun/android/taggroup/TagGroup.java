@@ -507,6 +507,22 @@ public class TagGroup extends ViewGroup {
         mOnTagChangeListener = l;
     }
 
+
+    /**
+     * 在最后添加一个普通tag
+     * @param tag
+     */
+    public void appendNormalTag(String tag){
+        int addIndex = getChildCount();
+        final TagView previousInputTag = getInputTag();
+        if (previousInputTag != null) {
+            addIndex ++;
+        }
+        final TagView newNormalTag = new TagView(getContext(), TagView.STATE_NORMAL, tag);
+        newNormalTag.setOnClickListener(mInternalTagClickListener);
+        addView(newNormalTag,addIndex);
+    }
+
     /**
      * @see #appendInputTag(String)
      */
